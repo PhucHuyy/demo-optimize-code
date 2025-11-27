@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/btnLoadDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Default (ARGB_8888)" />
+
+    <Button
+        android:id="@+id/btnLoadOptimized"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Tối ưu (RGB_565)" />
+
+    <TextView
+        android:id="@+id/tvMemInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Thông tin RAM: ..."
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
+        android:background="#EEE" />
+</LinearLayout>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    tools:context=".DashboardActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Demo Optimizaton"
+            android:textColor="#333333"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:text="Android Performance Benchmarks"
+            android:textColor="#757575"
+            android:textSize="16sp" />
+
+        <TextView
+            style="@style/HeaderStyle"
+            android:text="1. Database &amp; Algorithm"
+            android:drawableStart="@android:drawable/ic_menu_sort_by_size"
+            android:drawablePadding="8dp"
+            android:drawableTint="#2196F3"/>
+
+        <Button
+            android:id="@+id/btnSqlite"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#2196F3"
+            android:text="SQLite Bulk Insert" />
+
+        <Button
+            android:id="@+id/btnRecursion"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#42A5F5"
+            android:text="Recursion vs Iteration" />
+
+        <TextView
+            style="@style/HeaderStyle"
+            android:text="2. Memory Optimization"
+            android:drawableStart="@android:drawable/ic_menu_gallery"
+            android:drawablePadding="8dp"
+            android:drawableTint="#4CAF50"/>
+
+        <Button
+            android:id="@+id/btnMemory"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#4CAF50"
+            android:text="HashMap vs SparseArray" />
+
+        <Button
+            android:id="@+id/btnBitmapMem"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#66BB6A"
+            android:text="Bitmap Config (RGB_565)" />
+
+        <Button
+            android:id="@+id/btnBitmapDownsample"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#81C784"
+            android:text="Bitmap Downsampling" />
+
+        <TextView
+            style="@style/HeaderStyle"
+            android:text="3. Language &amp; Network"
+            android:drawableStart="@android:drawable/ic_menu_upload_you_tube"
+            android:drawablePadding="8dp"
+            android:drawableTint="#FF9800"/>
+
+        <Button
+            android:id="@+id/btnKotlin"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#FF9800"
+            android:text="Kotlin: Sequence &amp; Inline" />
+
+        <Button
+            android:id="@+id/btnCache"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#FFB74D"
+            android:text="LruCache Images" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+</ScrollView>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:orientation="vertical"-->
+<!--    android:padding="24dp"-->
+<!--    android:gravity="center_vertical"-->
+<!--    android:background="#F5F5F5">-->
+
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Tối ưu hóa Ứng dụng"-->
+<!--        android:textSize="28sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:textColor="#333"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_marginBottom="40dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnSqlite"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:text="1. Tối ưu SQLite (Java)"-->
+<!--        android:textSize="18sp"-->
+<!--        android:backgroundTint="#2196F3"-->
+<!--        android:layout_marginBottom="16dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnMemory"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:text="2. Tối ưu Bộ nhớ (Boxing)"-->
+<!--        android:textSize="18sp"-->
+<!--        android:backgroundTint="#4CAF50"-->
+<!--        android:layout_marginBottom="16dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnKotlin"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="70dp"-->
+<!--        android:text="3. Kotlin Language Features"-->
+<!--        android:textSize="18sp"-->
+<!--        android:backgroundTint="#FF9800"/>-->
+
+<!--</LinearLayout>-->

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etInputN"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập n (VD: 5000 hoặc 20000)"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnRunRecursive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chạy Đệ Quy (Recursive)" />
+
+    <Button
+        android:id="@+id/btnRunIterative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chạy Lặp (Iterative)" />
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Kết quả: "
+        android:textSize="16sp" />
+</LinearLayout>

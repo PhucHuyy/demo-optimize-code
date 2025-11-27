@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Demo Tối ưu Bộ nhớ"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(HashMap vs SparseArray)"
+        android:textSize="16sp"
+        android:textColor="#666666"
+        android:layout_marginBottom="40dp"/>
+
+    <Button
+        android:id="@+id/btnTestHashMap"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Chạy HashMap (Bad Practice)"
+        android:backgroundTint="#FF5722"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"/>
+
+    <Button
+        android:id="@+id/btnTestSparseArray"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Chạy SparseArray (Optimized)"
+        android:backgroundTint="#4CAF50"
+        android:textSize="16sp"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kết quả đo lường:"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chưa có dữ liệu. Vui lòng bấm nút để kiểm tra."
+        android:textSize="16sp"
+        android:textColor="#333"
+        android:padding="16dp"
+        android:background="#F0F0F0"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="*Lý thuyết: HashMap dùng Integer (Object) gây tốn bộ nhớ do Autoboxing header. SparseArray dùng int (Primitive) giúp tiết kiệm bộ nhớ hơn."
+        android:textSize="12sp"
+        android:textColor="#888"
+        android:fontFamily="monospace"/>
+
+</LinearLayout>
