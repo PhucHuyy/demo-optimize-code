@@ -9,6 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chọn tập dữ liệu test:"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerDataset"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:background="@android:drawable/btn_dropdown"/>
+
         <Button
             android:id="@+id/btnInsertNaive"
             android:text="Insert từng dòng"
@@ -33,13 +47,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/txtResult"
-            android:text="Result will show here..."
-            android:paddingTop="20dp"
-            android:textSize="16sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" /> <TextView
+        android:id="@+id/txtResult"
+        android:text="Vui lòng chọn dữ liệu..."
+        android:paddingTop="20dp"
+        android:textSize="16sp"
+        android:textColor="#333"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     </LinearLayout>
 </ScrollView>
