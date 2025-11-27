@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -22,14 +25,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".database.SqliteDemoActivity" />
-
         <activity android:name=".memory.MemoryDemoActivity" />
-
         <activity android:name=".network.KotlinFeaturesActivity" />
         <activity android:name=".database.RecursionActivity" />
         <activity android:name=".memory.BitmapActivity" />
         <activity android:name=".memory.BitmapDownsamplingActivity" />
         <activity android:name=".network.CacheActivity" />
+        <activity android:name=".Broadcast.BroadcastDemo1Activity" />
+        <activity android:name=".Broadcast.BroadcastDemo2Activity" />
     </application>
 
 </manifest>

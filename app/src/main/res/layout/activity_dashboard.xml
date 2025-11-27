@@ -94,6 +94,25 @@
             android:backgroundTint="#FFB74D"
             android:text="LruCache Images" />
 
+        <TextView
+            style="@style/HeaderStyle"
+            android:text="4. Broadcast Receiver"
+            android:drawableStart="@android:drawable/ic_dialog_alert"
+            android:drawablePadding="8dp"
+            android:drawableTint="#FF9800"/>
+
+        <Button
+            android:id="@+id/btnBroadcast1"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#FF9800"
+            android:text="Main Thread Blocking in BroadcastReceiver" />
+
+        <Button
+            android:id="@+id/btnBroadcast2"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#FFB74D"
+            android:text="BroadcastReceiver Memory Leak" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="50dp"/>

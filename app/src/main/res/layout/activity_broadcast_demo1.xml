@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:layout_marginTop="50dp">
+
+    <!-- Banner trạng thái mạng -->
+    <TextView
+        android:id="@+id/tvNetworkStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NETWORK: UNKNOWN"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="#DDDDDD" />
+
+    <!-- Checkbox: bật/tắt onReceive nặng -->
+    <CheckBox
+        android:id="@+id/cbHeavyOnReceive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chưa tối ưu"
+        android:layout_marginTop="12dp"
+        android:padding="6dp" />
+
+    <!-- Reload danh sách ảnh -->
+    <Button
+        android:id="@+id/btnClearCache"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp" />
+
+    <!-- RecyclerView load ảnh -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvImages"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>

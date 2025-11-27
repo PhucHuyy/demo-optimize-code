@@ -30,6 +30,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.importcsvproject.Broadcast.BroadcastDemo1Activity;
+import com.example.importcsvproject.Broadcast.BroadcastDemo2Activity;
 import com.example.importcsvproject.database.RecursionActivity;
 import com.example.importcsvproject.database.SqliteDemoActivity;
 import com.example.importcsvproject.memory.BitmapActivity;
@@ -71,5 +73,14 @@ public class DashboardActivity extends AppCompatActivity {
         // 4. Cache Ảnh
         findViewById(R.id.btnCache).setOnClickListener(v ->
                 startActivity(new Intent(this, CacheActivity.class)));
+
+        // --- NHÓM 3: Project Mới (Vừa thêm vào) ---
+        //1.
+        findViewById(R.id.btnBroadcast1).setOnClickListener(v ->
+                startActivity(new Intent(this, BroadcastDemo1Activity.class)));
+
+        //2. BroadcastReceiver Memory Leak
+        findViewById(R.id.btnBroadcast2).setOnClickListener(v ->
+                startActivity(new Intent(this, BroadcastDemo2Activity.class)));
     }
 }
