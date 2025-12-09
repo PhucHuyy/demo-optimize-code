@@ -48,7 +48,7 @@
             android:id="@+id/btnRecursion"
             style="@style/ButtonStyle"
             android:backgroundTint="#42A5F5"
-            android:text="Recursion vs Iteration" />
+            android:text="Recursion reduction" />
 
         <TextView
             style="@style/HeaderStyle"

@@ -6,14 +6,12 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.view.Gravity;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.importcsvproject.R;
 
@@ -22,136 +20,219 @@ import java.util.List;
 
 public class BitmapDownsamplingActivity extends AppCompatActivity {
 
-    private LinearLayout containerImages;
     private TextView tvInfo;
-    private List<Bitmap> loadedBitmaps = new ArrayList<>(); // Giữ tham chiếu để GC không dọn, nhằm đo RAM
+    private RecyclerView rvFriends;
+    private FriendAdapter adapter;
+    private final List<Friend> friends = new ArrayList<>();
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
-    // Cấu hình kích thước thumbnail mong muốn (nhỏ hơn nhiều so với ảnh gốc)
-    private static final int REQ_WIDTH = 300;
-    private static final int REQ_HEIGHT = 300;
+    // Kích thước mong muốn cho avatar (px)
+    private static final int REQ_WIDTH = 200;
+    private static final int REQ_HEIGHT = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bitmap_downsampling);
 
-        containerImages = findViewById(R.id.containerImages);
         tvInfo = findViewById(R.id.tvInfo);
+        rvFriends = findViewById(R.id.rvFriends);
         Button btnOriginal = findViewById(R.id.btnLoadOriginal);
         Button btnOptimized = findViewById(R.id.btnLoadOptimized);
 
-        // 1. Nút Load Nguyên Bản (Nguy hiểm)
-        btnOriginal.setOnClickListener(v -> {
-            clearPreviousImages();
-            tvInfo.setText("Đang load 10 ảnh gốc (Gây lag)...");
+        // Khởi tạo danh sách bạn bè giả lập
+        initFriends();
 
-            // Chạy thread riêng để tránh đơ UI ngay lập tức
-            new Thread(() -> {
-                try {
-                    long totalBytes = 0;
-                    for (int i = 0; i < 10; i++) {
-                        // LOAD THÔ: Đọc nguyên file ảnh lớn vào RAM
-                        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.avatar);
+        rvFriends.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new FriendAdapter(friends);
+        rvFriends.setAdapter(adapter);
 
-                        if (bitmap != null) {
-                            loadedBitmaps.add(bitmap);
-                            totalBytes += bitmap.getAllocationByteCount();
+        btnOriginal.setOnClickListener(v -> loadAvatars(false));
+        btnOptimized.setOnClickListener(v -> loadAvatars(true));
+    }
 
-                            // Cập nhật UI từng ảnh một
-                            final int index = i;
-                            final Bitmap finalBm = bitmap;
-                            new Handler(Looper.getMainLooper()).post(() -> addImageToLayout(finalBm, "Ảnh gốc " + (index+1)));
-                        }
-                    }
-                    updateMemoryInfo(totalBytes);
-                } catch (OutOfMemoryError e) {
-                    // Đây là điều chúng ta mong đợi khi load ảnh gốc
-                    new Handler(Looper.getMainLooper()).post(() -> {
-                        tvInfo.setText("CRASHED! Hết bộ nhớ (OOM)!");
-                        Toast.makeText(BitmapDownsamplingActivity.this, "Điện thoại đã hết RAM!", Toast.LENGTH_LONG).show();
-                    });
+    private void initFriends() {
+        friends.clear();
+        friends.add(new Friend("An"));
+        friends.add(new Friend("Bình"));
+        friends.add(new Friend("Chi"));
+        friends.add(new Friend("Dũng"));
+        friends.add(new Friend("Giang"));
+        friends.add(new Friend("Hà"));
+        friends.add(new Friend("Khánh"));
+        friends.add(new Friend("Lan"));
+        friends.add(new Friend("Minh"));
+        friends.add(new Friend("Ngọc"));
+        // Bạn có thể thêm nhiều bạn nữa cho list dài hơn
+    }
+
+    /**
+     * Load avatar cho tất cả bạn bè.
+     *
+     * @param optimized true  -> dùng downsampling
+     *                  false -> load nguyên bản
+     */
+    private void loadAvatars(boolean optimized) {
+        // Dọn bitmap cũ (nếu có) để tránh rò rỉ
+        clearBitmaps();
+
+        tvInfo.setText(optimized
+                ? "Đang load avatar đã downsample..."
+                : "Đang load avatar nguyên bản (có thể tốn RAM)...");
+
+        new Thread(() -> {
+            long totalTime = 0;
+            long totalBytes = 0;
+
+            for (Friend f : friends) {
+                long start = System.currentTimeMillis();
+                Bitmap bm;
+
+                if (optimized) {
+                    bm = decodeSampledBitmapFromResource(
+                            getResources(),
+                            R.drawable.avatar,
+                            REQ_WIDTH,
+                            REQ_HEIGHT
+                    );
+                } else {
+                    bm = BitmapFactory.decodeResource(
+                            getResources(),
+                            R.drawable.avatar
+                    );
                 }
-            }).start();
-        });
 
-        // 2. Nút Load Tối Ưu (An toàn)
-        btnOptimized.setOnClickListener(v -> {
-            clearPreviousImages();
-            tvInfo.setText("Đang xử lý tối ưu...");
+                long end = System.currentTimeMillis();
+                long time = end - start;
 
-            new Thread(() -> {
-                long totalBytes = 0;
-                for (int i = 0; i < 10; i++) {
-                    // LOAD TỐI ƯU: Tính toán và chỉ load bản thu nhỏ
-                    Bitmap bitmap = decodeSampledBitmapFromResource(getResources(), R.drawable.img, REQ_WIDTH, REQ_HEIGHT);
+                f.avatar = bm;
+                f.loadTimeMs = time;
 
-                    if (bitmap != null) {
-                        loadedBitmaps.add(bitmap);
-                        totalBytes += bitmap.getAllocationByteCount();
-
-                        final int index = i;
-                        final Bitmap finalBm = bitmap;
-                        new Handler(Looper.getMainLooper()).post(() -> addImageToLayout(finalBm, "Đã tối ưu " + (index+1)));
-                    }
+                if (bm != null) {
+                    totalBytes += bm.getAllocationByteCount();
                 }
-                updateMemoryInfo(totalBytes);
-            }).start();
-        });
+                totalTime += time;
+            }
+
+            final long finalTotalTime = totalTime;
+            final long finalTotalBytes = totalBytes;
+
+            mainHandler.post(() -> {
+                adapter.notifyDataSetChanged();
+
+                float mb = finalTotalBytes / (1024f * 1024f);
+                String mode = optimized ? "ĐÃ DOWNSAMPLE" : "NGUYÊN BẢN";
+
+                tvInfo.setText(
+                        "Chế độ: " + mode +
+                                "\nSố bạn: " + friends.size() +
+                                "\nTổng thời gian load: " + finalTotalTime + " ms" +
+                                String.format("\nTổng bộ nhớ avatar: %.2f MB", mb)
+                );
+            });
+        }).start();
     }
 
-    // --- HÀM HỖ TRỢ HIỂN THỊ ---
-    private void addImageToLayout(Bitmap bitmap, String label) {
-        ImageView iv = new ImageView(this);
-        iv.setImageBitmap(bitmap);
-
-        // Set cứng kích thước khung hiển thị (Thumbnail View)
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(REQ_WIDTH, REQ_HEIGHT);
-        params.setMargins(0, 10, 0, 30);
-        iv.setLayoutParams(params);
-        iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-        TextView tv = new TextView(this);
-        tv.setText(label);
-        tv.setGravity(Gravity.CENTER);
-
-        containerImages.addView(tv);
-        containerImages.addView(iv);
-    }
-
-    private void updateMemoryInfo(long totalBytes) {
-        double mb = totalBytes / (1024.0 * 1024.0);
-        String msg = String.format("Đã load 10 ảnh.\nTổng RAM tiêu thụ: %.2f MB", mb);
-
-        new Handler(Looper.getMainLooper()).post(() -> tvInfo.setText(msg));
-    }
-
-    private void clearPreviousImages() {
-        containerImages.removeAllViews();
-        // Giải phóng bitmap cũ để trả lại RAM cho lần test sau
-        for (Bitmap bm : loadedBitmaps) {
-            if (!bm.isRecycled()) bm.recycle();
+    private void clearBitmaps() {
+        for (Friend f : friends) {
+            if (f.avatar != null && !f.avatar.isRecycled()) {
+                f.avatar.recycle();
+            }
+            f.avatar = null;
+            f.loadTimeMs = 0;
         }
-        loadedBitmaps.clear();
-        System.gc(); // Gợi ý hệ thống dọn rác ngay
+        System.gc();
+        adapter.notifyDataSetChanged();
     }
 
-    // --- CỐT LÕI CỦA TỐI ƯU (Copy từ Google Docs) ---
-    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
-        // Bước 1: Chỉ đọc kích thước ảnh (inJustDecodeBounds = true) chứ chưa load nội dung vào RAM
+    // ================== MODEL & ADAPTER ==================
+
+    private static class Friend {
+        final String name;
+        Bitmap avatar;
+        long loadTimeMs;
+
+        Friend(String name) {
+            this.name = name;
+        }
+    }
+
+    private class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendViewHolder> {
+
+        private final List<Friend> data;
+
+        FriendAdapter(List<Friend> data) {
+            this.data = data;
+        }
+
+        @Override
+        public FriendViewHolder onCreateViewHolder(android.view.ViewGroup parent, int viewType) {
+            android.view.View view = android.view.LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.item_friend, parent, false);
+            return new FriendViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(FriendViewHolder holder, int position) {
+            Friend f = data.get(position);
+            holder.tvName.setText(f.name);
+
+            if (f.avatar != null) {
+                holder.ivAvatar.setImageBitmap(f.avatar);
+                long sizeKb = f.avatar.getAllocationByteCount() / 1024;
+                holder.tvInfoItem.setText(
+                        "Time: " + f.loadTimeMs + " ms | Size: " + sizeKb + " KB"
+                );
+            } else {
+                holder.ivAvatar.setImageResource(0);
+                holder.tvInfoItem.setText("Chưa load avatar");
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
+
+        class FriendViewHolder extends RecyclerView.ViewHolder {
+            android.widget.ImageView ivAvatar;
+            android.widget.TextView tvName;
+            android.widget.TextView tvInfoItem;
+
+            FriendViewHolder(android.view.View itemView) {
+                super(itemView);
+                ivAvatar = itemView.findViewById(R.id.ivAvatar);
+                tvName = itemView.findViewById(R.id.tvName);
+                tvInfoItem = itemView.findViewById(R.id.tvInfoItem);
+            }
+        }
+    }
+
+    // ================== HÀM DOWNSAMPLING ==================
+
+    /**
+     * Decode bitmap theo kích thước mong muốn, tránh load full-size.
+     */
+    private Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                   int reqWidth, int reqHeight) {
+        // Bước 1: chỉ đọc kích thước (không load bitmap vào RAM)
         final BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(res, resId, options);
 
-        // Bước 2: Tính toán tỷ lệ inSampleSize
+        // Bước 2: tính inSampleSize
         options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
 
-        // Bước 3: Đọc ảnh thật với tỷ lệ đã tính (inJustDecodeBounds = false)
+        // Bước 3: decode thật với inSampleSize đã tính
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res, resId, options);
     }
 
-    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Kích thước gốc của ảnh
+    /**
+     * Tính inSampleSize là lũy thừa của 2 sao cho ảnh nhỏ lại gần với kích thước yêu cầu.
+     */
+    private int calculateInSampleSize(BitmapFactory.Options options,
+                                      int reqWidth, int reqHeight) {
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;
@@ -160,12 +241,12 @@ public class BitmapDownsamplingActivity extends AppCompatActivity {
             final int halfHeight = height / 2;
             final int halfWidth = width / 2;
 
-            // Tính lũy thừa của 2 sao cho kích thước vẫn lớn hơn kích thước yêu cầu
-            while ((halfHeight / inSampleSize) >= reqHeight && (halfWidth / inSampleSize) >= reqWidth) {
+            // Lặp nhân 2 cho tới khi kích thước chia cho inSampleSize vẫn còn >= req
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
                 inSampleSize *= 2;
             }
         }
         return inSampleSize;
     }
-
 }

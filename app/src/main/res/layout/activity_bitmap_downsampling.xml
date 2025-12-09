@@ -44,18 +44,11 @@
             android:backgroundTint="#4CAF50"/>
     </LinearLayout>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFriends"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp">
-
-        <LinearLayout
-            android:id="@+id/containerImages"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1" />
 
 </LinearLayout>
