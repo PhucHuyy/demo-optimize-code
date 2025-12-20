@@ -32,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.importcsvproject.Broadcast.BroadcastDemo1Activity;
 import com.example.importcsvproject.Broadcast.BroadcastDemo2Activity;
+import com.example.importcsvproject.database.QueryOptimizationActivity;
 import com.example.importcsvproject.database.RecursionActivity;
 import com.example.importcsvproject.database.SqliteDemoActivity;
 import com.example.importcsvproject.memory.BitmapActivity;
@@ -82,5 +83,8 @@ public class DashboardActivity extends AppCompatActivity {
         //2. BroadcastReceiver Memory Leak
         findViewById(R.id.btnBroadcast2).setOnClickListener(v ->
                 startActivity(new Intent(this, BroadcastDemo2Activity.class)));
+
+        findViewById(R.id.btnQueryOpt).setOnClickListener(v ->
+                startActivity(new Intent(this, QueryOptimizationActivity.class)));
     }
 }

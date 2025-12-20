@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="#FAFAFA">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Demo Tối Ưu Truy Vấn DB"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="30dp"
+        android:textColor="#333"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1. Không Tối Ưu (Full Scan)"
+        android:textStyle="bold"
+        android:textColor="#F44336"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tìm kiếm theo cột Text không có Index"
+        android:textSize="12sp"
+        android:textColor="#757575"/>
+
+    <Button
+        android:id="@+id/btnNoOpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Run Slow Query"
+        android:backgroundTint="#EF5350"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/tvResultNoOpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time: 0 ms"
+        android:padding="10dp"
+        android:background="#FFEBEE"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="2. Tối Ưu (Index/PK Lookup)"
+        android:textStyle="bold"
+        android:textColor="#4CAF50"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tìm kiếm theo ID (Primary Key)"
+        android:textSize="12sp"
+        android:textColor="#757575"/>
+
+    <Button
+        android:id="@+id/btnOpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Run Optimized Query"
+        android:backgroundTint="#66BB6A"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/tvResultOpt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time: 0 ms"
+        android:padding="10dp"
+        android:background="#E8F5E9"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="3. Tối Ưu Nhất (Index + Projection)"
+        android:textStyle="bold"
+        android:textColor="#2196F3"
+        android:layout_marginTop="20dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tìm theo ref_code + Chỉ lấy cột ID, Name"
+        android:textSize="12sp"
+        android:textColor="#757575"/>
+
+    <Button
+        android:id="@+id/btnProjection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Run Projection Query"
+        android:backgroundTint="#42A5F5"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/tvResultProjection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Time: 0 ms"
+        android:padding="10dp"
+        android:background="#E3F2FD"/>
+
+</LinearLayout>

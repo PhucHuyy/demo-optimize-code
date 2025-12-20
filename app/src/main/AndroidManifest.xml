@@ -33,6 +33,7 @@
         <activity android:name=".network.CacheActivity" />
         <activity android:name=".Broadcast.BroadcastDemo1Activity" />
         <activity android:name=".Broadcast.BroadcastDemo2Activity" />
+        <activity android:name=".database.QueryOptimizationActivity" />
     </application>
 
 </manifest>

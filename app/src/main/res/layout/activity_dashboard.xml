@@ -45,6 +45,12 @@
             android:text="SQLite Bulk Insert" />
 
         <Button
+            android:id="@+id/btnQueryOpt"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#1976D2"
+            android:text="SQL: Indexing vs Scan" />
+
+        <Button
             android:id="@+id/btnRecursion"
             style="@style/ButtonStyle"
             android:backgroundTint="#42A5F5"
