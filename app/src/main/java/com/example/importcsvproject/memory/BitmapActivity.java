@@ -25,7 +25,7 @@ public class BitmapActivity extends AppCompatActivity {
 
         // Lưu ý: Cần có ảnh res/drawable/test_image (Ảnh càng lớn càng rõ)
         // Nếu chưa có, hãy copy 1 ảnh vào res/drawable
-        int resId = R.drawable.img_1; // Thay bằng R.drawable.test_image
+        int resId = R.drawable.img_3; // Thay bằng R.drawable.test_image
 
         findViewById(R.id.btnLoadDefault).setOnClickListener(v -> loadBitmap(resId, false));
         findViewById(R.id.btnLoadOptimized).setOnClickListener(v -> loadBitmap(resId, true));
@@ -40,14 +40,14 @@ public class BitmapActivity extends AppCompatActivity {
         }
 
         BitmapFactory.Options options = new BitmapFactory.Options();
-
         if (optimized) {
-            // Cấu hình tối ưu: 2 byte/pixel, không kênh Alpha
             options.inPreferredConfig = Bitmap.Config.RGB_565;
         } else {
             // Cấu hình mặc định: 4 byte/pixel
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         }
+
+        options.inScaled = false;
 
         long startTime = System.currentTimeMillis();
         currentBitmap = BitmapFactory.decodeResource(getResources(), resId, options);

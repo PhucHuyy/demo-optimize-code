@@ -91,14 +91,18 @@ public class BitmapDownsamplingActivity extends AppCompatActivity {
                 if (optimized) {
                     bm = decodeSampledBitmapFromResource(
                             getResources(),
-                            R.drawable.avatar,
+                            R.drawable.img_2,
                             REQ_WIDTH,
                             REQ_HEIGHT
                     );
                 } else {
+                    BitmapFactory.Options opt = new BitmapFactory.Options();
+                    opt.inScaled = false;
+                    //opt.inPreferredConfig = Bitmap.Config.RGB_565;
                     bm = BitmapFactory.decodeResource(
                             getResources(),
-                            R.drawable.avatar
+                            R.drawable.img_2,
+                            opt
                     );
                 }
 
@@ -217,6 +221,7 @@ public class BitmapDownsamplingActivity extends AppCompatActivity {
                                                    int reqWidth, int reqHeight) {
         // Bước 1: chỉ đọc kích thước (không load bitmap vào RAM)
         final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inScaled = false;
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(res, resId, options);
 

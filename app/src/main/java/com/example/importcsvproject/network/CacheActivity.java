@@ -40,7 +40,7 @@ public class CacheActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cache);
 
-        // 1. Khởi tạo LruCache (1/8 RAM)
+        // Khởi tạo LruCache
         int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
         int cacheSize = maxMemory / 8;
         memoryCache = new LruCache<String, Bitmap>(cacheSize) {
@@ -97,16 +97,15 @@ public class CacheActivity extends AppCompatActivity {
             boolean useCache = cbUseCache.isChecked();
             long start = System.currentTimeMillis();
 
-            // LOGIC QUAN TRỌNG: Kiểm tra Cache
+            //Kiểm tra Cache
             if (useCache) {
                 Bitmap cachedBitmap = memoryCache.get(url);
                 if (cachedBitmap != null) {
                     holder.ivImage.setImageBitmap(cachedBitmap);
                     holder.tvLoadTime.setText("Cache HIT: " + (System.currentTimeMillis() - start) + " ms");
-                    return; // Xong, không cần tải mạng
+                    return;
                 }
             }
-
             // Nếu không có Cache hoặc Cache Miss -> Tải Mạng
             new ImageLoaderTask(holder.ivImage, holder.tvLoadTime, url, useCache).execute();
         }

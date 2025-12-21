@@ -28,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Original\n(Dễ Crash)"
+            android:text="Original"
             android:textSize="12sp"
             android:backgroundTint="#F44336"/>
 
@@ -39,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Optimized\n(Mượt mà)"
+            android:text="Optimized"
             android:textSize="12sp"
             android:backgroundTint="#4CAF50"/>
     </LinearLayout>
