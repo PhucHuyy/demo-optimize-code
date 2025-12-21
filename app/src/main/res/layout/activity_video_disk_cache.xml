@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#121212"> <androidx.media3.ui.PlayerView
+    android:id="@+id/playerView"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="#000000" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DISK CACHE MONITOR"
+                android:textColor="#4CAF50"
+                android:textSize="14sp"
+                android:letterSpacing="0.1"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#1E1E1E"
+                android:orientation="vertical"
+                android:padding="15dp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Source: IDLE"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/tvCacheSize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cache Size on Disk: 0 MB"
+                    android:textColor="#BBBBBB"
+                    android:textSize="14sp"
+                    android:layout_marginBottom="5dp"/>
+
+                <ProgressBar
+                    android:id="@+id/pbCache"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:max="100"
+                    android:progress="0"
+                    android:progressTint="#2196F3"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnLoadVideo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Play Video"
+                    android:backgroundTint="#2196F3"
+                    android:layout_marginEnd="10dp"/>
+
+                <Button
+                    android:id="@+id/btnClearCache"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Clear Cache"
+                    android:backgroundTint="#F44336"
+                    android:layout_marginStart="10dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Giải thích: Video sẽ được tải và lưu vào bộ nhớ máy (Disk). Lần xem sau sẽ KHÔNG tốn băng thông mạng."
+                android:textColor="#757575"
+                android:textSize="12sp"
+                android:layout_marginTop="20dp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

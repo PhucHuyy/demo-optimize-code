@@ -34,6 +34,8 @@
         <activity android:name=".Broadcast.BroadcastDemo1Activity" />
         <activity android:name=".Broadcast.BroadcastDemo2Activity" />
         <activity android:name=".database.QueryOptimizationActivity" />
+        <activity android:name=".memory.VideoDiskCacheActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

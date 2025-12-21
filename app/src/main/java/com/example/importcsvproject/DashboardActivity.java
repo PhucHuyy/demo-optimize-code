@@ -38,6 +38,7 @@ import com.example.importcsvproject.database.SqliteDemoActivity;
 import com.example.importcsvproject.memory.BitmapActivity;
 import com.example.importcsvproject.memory.BitmapDownsamplingActivity;
 import com.example.importcsvproject.memory.MemoryDemoActivity;
+import com.example.importcsvproject.memory.VideoDiskCacheActivity;
 import com.example.importcsvproject.network.CacheActivity;
 import com.example.importcsvproject.network.KotlinFeaturesActivity;
 
@@ -86,5 +87,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         findViewById(R.id.btnQueryOpt).setOnClickListener(v ->
                 startActivity(new Intent(this, QueryOptimizationActivity.class)));
+
+        findViewById(R.id.btnVideoCache).setOnClickListener(v ->
+                startActivity(new Intent(this, VideoDiskCacheActivity.class)));
     }
 }

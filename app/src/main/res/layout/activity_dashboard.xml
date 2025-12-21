@@ -100,6 +100,12 @@
             android:backgroundTint="#FFB74D"
             android:text="LruCache Images" />
 
+        <Button
+            android:id="@+id/btnVideoCache"
+            style="@style/ButtonStyle"
+            android:backgroundTint="#FFB74D"
+            android:text="DiskCache" />
+
         <TextView
             style="@style/HeaderStyle"
             android:text="4. Broadcast Receiver"
